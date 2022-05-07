@@ -6,6 +6,10 @@ Proyecto frontend en ReactJS de un CRUD de tareas ToDo, consumiendo un backend r
 
 En el proyecto se pueden evidenciar los siguientes cambios realizados con el fin de mejorar la aplicación:
 
+### Aspecto Visual
+
+Se instaló la dependencia react-bootstrap, se agregaron propiedades a algunos elementos para estilizarlos, se modificaron los formularios y las tablas para adaptar los estilos de react-bootstrap.
+
 ### Implementación de Rutas
 
 Se realizó la instalación de la dependencia react-router-dom
