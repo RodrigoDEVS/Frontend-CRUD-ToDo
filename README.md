@@ -28,5 +28,5 @@ Se agrega el checkbox junto con su función onChange para manejar el evento del 
 
 ## Video de Implementación
 
-
+https://youtu.be/KqbABpmuy5c
 
