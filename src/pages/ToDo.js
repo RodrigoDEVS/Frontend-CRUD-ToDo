@@ -1,7 +1,6 @@
 import React, { useContext, useReducer, useEffect, useRef, useState, createContext } from "react";
 import { Button, Table, Form } from 'react-bootstrap'
-
-const HOST_API = "http://localhost:8080/api"
+import { server } from "../context/Api";
 
 const initialState = {
     list: [],
@@ -27,7 +26,7 @@ const Formul = () => {
             isComplete: false
         };
 
-        fetch(HOST_API + "/todo", {
+        fetch(`${server}/todo`, {
             method: "POST",
             body: JSON.stringify(request),
             headers: {
@@ -51,7 +50,7 @@ const Formul = () => {
             isCompleted: item.isCompleted
         };
 
-        fetch(HOST_API + "/todo", {
+        fetch(`${server}/todo`, {
             method: "PUT",
             body: JSON.stringify(request),
             headers: {
@@ -80,7 +79,7 @@ const List = () => {
     const { dispatch, state } = useContext(Store)
 
     useEffect(() => {
-        fetch(HOST_API + "/todos")
+        fetch(`${server}/todos`)
             .then(response => response.json())
             .then(list => {
                 dispatch({ type: "update-list", list })
@@ -88,7 +87,7 @@ const List = () => {
     }, [state.list.length, dispatch])
 
     const onDelete = (id) => {
-        fetch(HOST_API + "/" + id + "/todo", {
+        fetch(`${server}/${id}/todo`, {
             method: "DELETE"
         })
             .then((list) => {
