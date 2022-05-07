@@ -22,6 +22,8 @@ se crea la Landing Page y se implementa dentro del App.js para que al cargar la 
 
 Se limpió App.js y se configuró la ruta inicial "/" para que la aplicación inicie desde la Landing Page.
 
+Se agregó el contexto para la conexión con la api, se implementó el uso de este contexto en todas las peticiones dentro de un template string
+
 ## Video de Implementación
 
 
