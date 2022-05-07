@@ -78,6 +78,7 @@ const List = () => {
 
     const { dispatch, state } = useContext(Store)
 
+    //const currentList = todo.list;
     useEffect(() => {
         fetch(`${server}/todos`)
             .then(response => response.json())
@@ -99,6 +100,25 @@ const List = () => {
         dispatch({ type: "edit-item", item: element })
     }
 
+    const onChange = (event, todo) => {
+        const request = {
+          name: todo.name,
+          id: todo.id,
+          completed: event.target.checked
+        };
+        fetch(`${server}/todo`, {
+          method: "PUT",
+          body: JSON.stringify(request),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.json())
+          .then((todo) => {
+            dispatch({ type: "update-item", item: todo });
+          });
+      };
+
     return <div className="container mt-3">
         <Table striped bordered hover>
             <thead>
@@ -112,9 +132,9 @@ const List = () => {
             <tbody>
                 {state.list.map((element, index) => (
                     <tr key={index}>
-                        <td>{element.id}</td>
+                        <td>{index+1}</td>
                         <td>{element.name}</td>
-                        <td style={{ textAlign: "center" }}>{element.isCompleted ? "Si" : "No"}</td>
+                        <td style={{ textAlign: "center" }}><input type="checkbox" defaultChecked={element.completed} onChange={(event) => onChange(event, element)}></input>{element.completed ? "Si" : "No"}</td>
                         <td style={{ textAlign: "center" }}>
                             <Button variant="primary" onClick={() => { onEdit(element) }}>Editar</Button>{' '}
                             <Button variant="danger" onClick={() => onDelete(element.id)}>Eliminar</Button>
