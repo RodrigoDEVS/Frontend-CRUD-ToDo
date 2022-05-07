@@ -24,6 +24,8 @@ Se limpió App.js y se configuró la ruta inicial "/" para que la aplicación in
 
 Se agregó el contexto para la conexión con la api, se implementó el uso de este contexto en todas las peticiones dentro de un template string
 
+Se agrega el checkbox junto con su función onChange para manejar el evento del checked y cambiar el estado de completed de true a false y viceversa, de igual manera en el mismo campo se dejó el texto Si y No para comfirmar los cambios.
+
 ## Video de Implementación
 
 
