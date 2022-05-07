@@ -1,4 +1,5 @@
 import React, { useContext, useReducer, useEffect, useRef, useState, createContext } from "react";
+import { Button, Table, Form } from 'react-bootstrap'
 
 const HOST_API = "http://localhost:8080/api"
 
@@ -65,13 +66,13 @@ const Formul = () => {
       });
   }
 
-  return <form className="container mt-5" ref={formRef}>
-    <input type="text" name="name" defaultValue={item.name} onChange={(event) => {
+  return <Form className="container mt-5" ref={formRef}>
+    <Form.Control type="text" name="name" defaultValue={item.name} onChange={(event) => {
       setState({ ...state, name: event.target.value })
     }} />
-    {item.id && <button onClick={onEdit}>Actualizar</button>}
-    {!item.id && <button onClick={onAdd}>Agregar</button>}
-  </form>
+    {item.id && <Button variant="secondary mt-2" onClick={onEdit}>Actualizar</Button>}
+    {!item.id && <Button variant="primary mt-2" onClick={onAdd}>Agregar</Button>}
+  </Form>
 }
 
 const List = () => {
@@ -99,14 +100,14 @@ const List = () => {
     dispatch({ type: "edit-item", item: element })
   }
 
-  return <div >
-    <table >
+  return <div className="container mt-3">
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th>ID</th>
-          <th >Nombre</th>
-          <th >¿Está Completado?</th>
-          <th >Acciones</th>
+          <th style={{ textAlign: "center" }}>Nombre</th>
+          <th style={{ textAlign: "center" }}>¿Está Completado?</th>
+          <th style={{ textAlign: "center" }}>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -114,20 +115,19 @@ const List = () => {
           <tr key={index}>
             <td>{element.id}</td>
             <td>{element.name}</td>
-            <td >{element.isCompleted === true? "Si": "No"}</td>
-            <td >
-              <button onClick={() => { onEdit(element) }}>Editar</button>
-              <button  onClick={() => onDelete(element.id)}>Eliminar</button>
+            <td style={{ textAlign: "center" }}>{element.isCompleted? "Si": "No"}</td>
+            <td style={{ textAlign: "center" }}>
+              <Button variant="primary" onClick={() => { onEdit(element) }}>Editar</Button>{' '}
+              <Button variant="danger" onClick={() => onDelete(element.id)}>Eliminar</Button>
             </td>
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   </div>
 }
 
 function reducer(state, action) {
-  console.log(state)
   switch (action.type) {
     case 'update-item':
       const listUpdateEdit = state.list.map((item) => {
